@@ -1,0 +1,15 @@
+{
+  "name": "moviescraperservice",
+  "version": "0.0.1",
+  "main":"scraper.js",
+  "author":"Sripathi Pai",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.3",
+    "request": "^2.87.0"
+  }
+}
