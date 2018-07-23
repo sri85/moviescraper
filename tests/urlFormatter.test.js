@@ -17,11 +17,26 @@ describe('urlFormatter ', () => {
     const expectedUrl = `https://www.imdb.com/title/tt3501632`;
     return expect(urlUtil.searchIMDBWithTitleId('tt3501632')).to.equal(expectedUrl);
   });
-  it('sanitize url should replace whitespace with plus sign', () => {
+  it('sanitize url(IMDB) should replace whitespace with plus sign', () => {
     return expect(urlUtil.sanitizeUrl('imdb', 'test url')).to.equal('test+url');
   });
-  it('sanitize url should trim the trailing and leading whitespace ', () => {
+  it('sanitize url(IMDB) should trim the trailing and leading whitespace ', () => {
     return expect(urlUtil.sanitizeUrl('imdb', '  test url  ')).to.equal('test+url');
+  });
+  it('sanitize url(IMDB) should empty string if the title has only space in it ', () => {
+    return expect(urlUtil.sanitizeUrl('imdb', '   ')).to.equal('');
+  });
+  it('sanitize url(IMDB) should empty string if the title has only space in it ', () => {
+    return expect(urlUtil.sanitizeUrl('imdb', 'test  url')).to.equal('test++url');
+  });
+  it('sanitize url(RottenTomatoes) should replace whitespace with underscores', () => {
+    return expect(urlUtil.sanitizeUrl('rottentomatoes', 'test url')).to.equal('test_url');
+  });
+  it('sanitize url(RottenTomatoes) should remove trailing and leading whitespaces replace whitespace with underscores', () => {
+    return expect(urlUtil.sanitizeUrl('rottentomatoes', ' test url ')).to.equal('test_url');
+  });
+  it('sanitize url(RottenTomatoes) should remove trailing and leading whitespaces replace whitespace with underscores', () => {
+    return expect(urlUtil.sanitizeUrl('myownsite', ' test url ')).to.equal(undefined);
   });
 
 });

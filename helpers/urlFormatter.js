@@ -16,7 +16,7 @@ class UrlFormatter {
       case 'imdb':
         return title.trim().replace(/\s/g, "+");
       case 'rottentomatoes':
-        return title.replace(/\s/g, "_").toLowerCase();
+        return title.trim().replace(/\s/g, "_").toLowerCase();
       default:
         return undefined;
     }
