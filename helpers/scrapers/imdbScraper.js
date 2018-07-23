@@ -8,6 +8,7 @@ class ImdbScraper extends Scraper {
     super();
 
   }
+
   getMovieDetailsWithId(url) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
@@ -24,13 +25,13 @@ class ImdbScraper extends Scraper {
     }));
   }
 
-  getMovieDetailsWithName(url,title) {
+  getMovieDetailsWithName(url, title) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
         if (error) {
           return reject(error);
         }
-        const jsonBody = {titleId: "", movieTitle: "",url:""};
+        const jsonBody = {titleId: "", movieTitle: "", url: ""};
         const $ = cheerio.load(html);
         const linkText = ($('td[class="result_text"] a').attr('href')).split("/")[2];
         jsonBody.titleId = linkText;

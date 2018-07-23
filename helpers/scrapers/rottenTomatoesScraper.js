@@ -3,16 +3,16 @@ const cheerio = require('cheerio');
 
 const Scraper = require('./scraper');
 
-class RottenTomatoesScraper extends Scraper{
+class RottenTomatoesScraper extends Scraper {
   constructor() {
     super();
 
   }
 
-  getMovieDetailsWithName(url,title) {
+  getMovieDetailsWithName(url, title) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
-        if (error){
+        if (error) {
           return reject(error);
         }
         let jsonBody = {title: "", release: "", rating: "", likes: ""};
