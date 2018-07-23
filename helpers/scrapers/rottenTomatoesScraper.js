@@ -1,8 +1,11 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-class RottenTomatoesScraper {
+const Scraper = require('./scraper');
+
+class RottenTomatoesScraper extends Scraper{
   constructor() {
+    super();
 
   }
 

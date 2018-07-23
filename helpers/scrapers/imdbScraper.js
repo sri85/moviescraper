@@ -1,11 +1,13 @@
 const request = require('request');
 const cheerio = require('cheerio');
 
-class ImdbScraper {
+const Scraper = require('./scraper');
+
+class ImdbScraper extends Scraper {
   constructor() {
+    super();
 
   }
-
   getMovieDetailsWithId(url) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
@@ -35,10 +37,7 @@ class ImdbScraper {
         jsonBody.movieTitle = title;
         jsonBody.url = "https://www.imdb.com/title/" + linkText;
         return resolve(jsonBody);
-
       });
-
-
     }));
   }
 }
