@@ -14,7 +14,7 @@ class UrlFormatter {
   sanitizeUrl(movieSite,title) {
     switch (movieSite.toLowerCase()){
       case 'imdb':
-        return title.replace(/\s/g, "+");
+        return title.trim().replace(/\s/g, "+");
       case 'rottentomatoes':
         return title.replace(/\s/g, "_").toLowerCase();
       default:

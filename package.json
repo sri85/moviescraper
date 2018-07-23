@@ -5,7 +5,8 @@
   "author":"Sripathi Pai",
   "license": "MIT",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test":"./node_modules/mocha/bin/mocha --exit --timeout 120000 tests"
   },
   "dependencies": {
     "cheerio": "^1.0.0-rc.2",
