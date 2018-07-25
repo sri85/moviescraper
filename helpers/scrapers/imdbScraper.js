@@ -17,7 +17,7 @@ class ImdbScraper extends Scraper {
         }
         const jsonBody = {title: "", release: "", rating: ""};
         const $ = cheerio.load(html);
-        jsonBody.title = ($('h1[itemprop="name"]').text());
+        jsonBody.title = ($('h1[itemprop="name"]').text().trim());
         jsonBody.release = ($('span[id="titleYear"] a')).text();
         jsonBody.rating = ($('div[class="ratingValue"] span')).text();
         return resolve(jsonBody);
