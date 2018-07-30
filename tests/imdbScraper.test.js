@@ -2,12 +2,10 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const {expect} = require('chai');
 chai.use(chaiAsPromised);
+
 const imdb = require('../helpers/scrapers/imdbScraper');
 
 describe('IMDB scraper', () => {
-  beforeEach(() => {
-
-  });
   it('should return title , release and rating of a movie when a valid imdb movie id is passed  ', () => {
     const expectedResult = {"title": 'Dilwale Dulhania Le Jayenge (1995)', "release": '1995', "rating": '8.2/10'};
     return imdb.getMovieDetailsWithId('https://www.imdb.com/title/tt0112870').then(actualDetails => {

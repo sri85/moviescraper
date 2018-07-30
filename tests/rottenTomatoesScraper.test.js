@@ -2,8 +2,9 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const {expect} = require('chai');
 chai.use(chaiAsPromised);
-const rottenTomatoes = require('../helpers/scrapers/rottenTomatoesScraper');
 const nock = require('nock');
+
+const rottenTomatoes = require('../helpers/scrapers/rottenTomatoesScraper');
 const rottenTomatoesHtml = require('./testHelpers/helpers');
 
 describe('RottenTomatoes scraper', () => {
