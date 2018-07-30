@@ -4,7 +4,7 @@ const {expect} = require('chai');
 chai.use(chaiAsPromised);
 const rottenTomatoes = require('../helpers/scrapers/rottenTomatoesScraper');
 const nock = require('nock');
-const rottenTomatoesHtml = require('./helpers');
+const rottenTomatoesHtml = require('./testHelpers/helpers');
 
 describe('RottenTomatoes scraper', () => {
   it('should return likes,rating ,release and title when a valid url is passed ', () => {
