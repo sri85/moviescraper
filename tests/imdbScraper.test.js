@@ -8,20 +8,20 @@ describe('IMDB scraper', () => {
   beforeEach(() => {
 
   });
-  it('Check the json response returned by ', () => {
+  it('should return title , release and rating of a movie when a valid imdb movie id is passed  ', () => {
     const expectedResult = {"title": 'Dilwale Dulhania Le Jayenge (1995)', "release": '1995', "rating": '8.2/10'};
     return imdb.getMovieDetailsWithId('https://www.imdb.com/title/tt0112870').then(actualDetails => {
       return expect(actualDetails).to.deep.equal(expectedResult);
     });
   });
 
-  it('Check the json response returned by ', () => {
+  it('should return empty string when a invalid is passed ', () => {
     const expectedResult = {"title": '', "release": '', "rating": ''};
     return imdb.getMovieDetailsWithId('https://google.com').then(actualDetails => {
       return expect(actualDetails).to.deep.equal(expectedResult);
     });
   });
-  it('Check the json response returned by getMovieDetailsWithName', () => {
+  it('should return titleId , movieTitle and url when a movie title is passed', () => {
     const expectedResult = {
       "movieTitle": 'Dilwale',
       "titleId": 'tt4535650',
