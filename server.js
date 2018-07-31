@@ -35,9 +35,10 @@ app.get('/api/rottentomatoes/name/:title', (req, response) => {
   });
 });
 
-app.listen(serverConfig.port, (err) => {
+const server = app.listen(serverConfig.port, (err) => {
   if (err) {
     throw err;
   }
   console.log(`Movie scraper service is running on ${serverConfig.port} `);
 });
+module.exports = server;
