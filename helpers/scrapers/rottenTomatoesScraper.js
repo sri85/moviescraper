@@ -10,7 +10,6 @@ class RottenTomatoesScraper extends Scraper {
   }
 
   sanitizeRating(ratingText) {
-    console.log(`Here`+ratingText);
     if (ratingText === undefined || ratingText === '') {
       return '';
     }

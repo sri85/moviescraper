@@ -1,0 +1,13 @@
+const imdbHTML =
+  '<html>' +
+  '<h1 itemprop="name" class="">Dilwale Dulhania Le Jayenge&nbsp;<span id="titleYear">' +
+  '(<a href="/year/1995/?ref_=tt_ov_inf">1995</a>)</span> </h1>' +
+  '<div class="ratingValue">\n' +
+  '<strong title="8.2 based on 54,599 user ratings"><span itemprop="ratingValue">8.2</span></strong>' +
+  '<span class="grey">/</span><span class="grey" itemprop="bestRating">10</span> </div>' +
+  '<table class="findList">\n' +
+  '<tbody><tr class="findResult odd"> <td class="primary_photo"> <a href="/title/tt4535650/?ref_=fn_al_tt_1"><img src="https://m.media-amazon.com/images/M/MV5BMjEyNzAyNjExN15BMl5BanBnXkFtZTgwNjM0MDczNzE@._V1_UX32_CR0,0,32,44_AL_.jpg"></a> </td> <td class="result_text"> <a href="/title/tt4535650/?ref_=fn_al_tt_1">Dilwale</a> (2015) </td> </tr><tr class="findResult even"> <td class="primary_photo"> <a href="/title/tt0337611/?ref_=fn_al_tt_2"><img src="https://m.media-amazon.com/images/M/MV5BMTUzNTczMDg5OV5BMl5BanBnXkFtZTgwMDU1NTg0NjE@._V1_UY44_CR0,0,32,44_AL_.jpg"></a> </td> <td class="result_text"> <a href="/title/tt0337611/?ref_=fn_al_tt_2">Dilwale</a> (1994) </td> </tr><tr class="findResult odd"> <td class="primary_photo"> <a href="/title/tt2671456/?ref_=fn_al_tt_3"><img src="https://m.media-amazon.com/images/G/01/imdb/images/nopicture/32x44/film-3119741174._CB499603771_.png"></a> </td> <td class="result_text"> <a href="/title/tt2671456/?ref_=fn_al_tt_3">Do Dilwale</a> (1977) </td> </tr><tr class="findResult even"> <td class="primary_photo"> <a href="/title/tt0317117/?ref_=fn_al_tt_4"><img src="https://m.media-amazon.com/images/M/MV5BMDEwYTUzZjQtNmQ5NC00MmMxLTliYWUtYTEzN2I1N2QzNDBjXkEyXkFqcGdeQXVyMzU0NzkwMDg@._V1_UX32_CR0,0,32,44_AL_.jpg"></a> </td> <td class="result_text"> <a href="/title/tt0317117/?ref_=fn_al_tt_4">Bade Dil Wala</a> (1983) </td> </tr><tr class="findResult odd"> <td class="primary_photo"> <a href="/title/tt0286478/?ref_=fn_al_tt_5"><img src="https://m.media-amazon.com/images/M/MV5BMjk4OTU5YzctYTUwMC00ODQ3LTk5NWUtNzM0YTA1YWM5YTBmXkEyXkFqcGdeQXVyNjc1MzY5NDU@._V1_UX32_CR0,0,32,44_AL_.jpg"></a> </td> <td class="result_text"> <a href="/title/tt0286478/?ref_=fn_al_tt_5">Bade Dilwala</a> (1999) </td> </tr><tr class="findResult even"> <td class="primary_photo"> <a href="/title/tt0112870/?ref_=fn_al_tt_6"><img src="https://m.media-amazon.com/images/M/MV5BMDQ2ZmE2NTMtZDE3NC00YzFjLWJhNmEtMDEzMTI5ZjU2ZGM0XkEyXkFqcGdeQXVyNTkzNDQ4ODc@._V1_UY44_CR0,0,32,44_AL_.jpg"></a> </td> <td class="result_text"> <a href="/title/tt0112870/?ref_=fn_al_tt_6">Dilwale Dulhania Le Jayenge</a> (1995) </td> </tr></tbody></table></html>';
+
+
+
+module.exports = imdbHTML;

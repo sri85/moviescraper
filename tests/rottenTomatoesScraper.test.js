@@ -5,7 +5,7 @@ chai.use(chaiAsPromised);
 const nock = require('nock');
 
 const rottenTomatoes = require('../helpers/scrapers/rottenTomatoesScraper');
-const rottenTomatoesHtml = require('./testHelpers/helpers');
+const rottenTomatoesHtml = require('./testHelpers/rottenTomatoesMarkup');
 
 describe('RottenTomatoes scraper', () => {
   it('should return likes,rating ,release and title when a valid url is passed ', () => {

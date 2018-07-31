@@ -9,6 +9,14 @@ class ImdbScraper extends Scraper {
 
   }
 
+  sanitizeRating(rating) {
+    if (rating === undefined || rating === '') {
+      return '';
+    }
+    return rating.split("/")[2];
+
+  }
+
   getMovieDetailsWithId(url) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
@@ -33,7 +41,7 @@ class ImdbScraper extends Scraper {
         }
         const jsonBody = {titleId: "", movieTitle: "", url: ""};
         const $ = cheerio.load(html);
-        const linkText = ($('td[class="result_text"] a').attr('href')).split("/")[2];
+        const linkText = this.sanitizeRating($('td[class="result_text"] a').attr('href'));
         jsonBody.titleId = linkText;
         jsonBody.movieTitle = title;
         jsonBody.url = "https://www.imdb.com/title/" + linkText;
