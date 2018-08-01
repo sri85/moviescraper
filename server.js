@@ -1,5 +1,6 @@
 const express = require('express');
 const apicache = require('apicache');
+const logger = require('./logger');
 const urlFormatter = require('./helpers/urlFormatter');
 const serverConfig = require('./helpers/serverConfig');
 const imdbScraper = require('./helpers/scrapers/imdbScraper');
@@ -8,6 +9,31 @@ const rottenTomatoesScraper = require('./helpers/scrapers/rottenTomatoesScraper'
 const app = express();
 let cache = apicache.middleware;
 app.use(cache('5 minutes'));
+app.use((req, res, next) => {
+  const log = logger.loggerInstance.child({
+    id: req.id,
+    body: req.body
+  }, true);
+  log.info({
+    req: req
+  });
+  next();
+});
+
+app.use(function (req, res, next) {
+  function afterResponse() {
+    res.removeListener('finish', afterResponse);
+    res.removeListener('close', afterResponse);
+    const log = logger.loggerInstance.child({
+      id: req.id
+    }, true);
+    log.info({res:res}, 'response')
+  }
+
+  res.on('finish', afterResponse);
+  res.on('close', afterResponse);
+  next();
+});
 
 app.get('/api/imdb/getMovieDetails/id/:titleId', (req, response) => {
 
