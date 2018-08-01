@@ -1,24 +1,26 @@
 {
   "name": "moviescraperservice",
   "version": "0.0.1",
-  "main":"scraper.js",
-  "author":"Sripathi Pai",
+  "main": "scraper.js",
+  "author": "Sripathi Pai",
   "license": "MIT",
   "scripts": {
     "start": "node server.js",
-    "test":"./node_modules/mocha/bin/mocha --exit --timeout 120000 tests"
+    "test": "./node_modules/mocha/bin/mocha --exit --timeout 120000 tests"
   },
   "dependencies": {
+    "apicache": "^1.2.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
     "request": "^2.87.0"
   },
   "devDependencies": {
-    "chai":"^4.1.2",
+    "chai": "^4.1.2",
     "jasmine-node": "^1.14.5",
     "mocha": "^5.0.4",
     "nock": "^9.4.2",
     "chai-as-promised": "^7.1.1",
-    "chai-http": "^4.0.0"
+    "chai-http": "^4.0.0",
+    "supertest": "^3.1.0"
   }
 }

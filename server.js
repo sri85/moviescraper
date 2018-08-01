@@ -1,17 +1,20 @@
 const express = require('express');
+const apicache = require('apicache');
 const urlFormatter = require('./helpers/urlFormatter');
 const serverConfig = require('./helpers/serverConfig');
 const imdbScraper = require('./helpers/scrapers/imdbScraper');
 const rottenTomatoesScraper = require('./helpers/scrapers/rottenTomatoesScraper');
 
 const app = express();
+let cache = apicache.middleware;
+app.use(cache('5 minutes'));
 
 app.get('/api/imdb/getMovieDetails/id/:titleId', (req, response) => {
 
   const imdbUrl = urlFormatter.searchIMDBWithTitleId(req.params.titleId);
 
   return imdbScraper.getMovieDetailsWithId(imdbUrl).then((jsonResponse) => {
-    return response.json(jsonResponse);
+    return response.json(jsonResponse).end();
   })
 });
 
@@ -21,7 +24,7 @@ app.get('/api/imdb/getId/name/:title', (req, response) => {
   const imdbUrl = urlFormatter.searchIMDBWithMovieTitle(movieTitle);
 
   return imdbScraper.getMovieDetailsWithName(imdbUrl, movieTitle).then(movieDetails => {
-    return response.json(movieDetails);
+    return response.json(movieDetails).end();
   });
 });
 
