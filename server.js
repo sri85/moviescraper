@@ -64,6 +64,27 @@ app.get('/api/rottentomatoes/name/:title', (req, response) => {
   });
 });
 
+app.get('/api/movieDetails/:title',(req,response) => {
+
+  const rottenTomatoesMovieTitle = urlFormatter.sanitizeUrl('rottentomatoes', req.params.title);
+  const rottenTomatoesUrl = `https://www.rottentomatoes.com/m/${rottenTomatoesMovieTitle}`;
+  const imdbMovieTitle = urlFormatter.sanitizeUrl('imdb', req.params.title);
+  const imdbUrl = urlFormatter.searchIMDBWithMovieTitle(imdbMovieTitle);
+
+  return rottenTomatoesScraper.getMovieDetailsWithName(rottenTomatoesUrl,rottenTomatoesMovieTitle).then(rottenMovieDetails => {
+    return imdbScraper.getMovieDetailsWithName(imdbUrl, imdbMovieTitle).then(ImdbMovieDetails => {
+      console.log(ImdbMovieDetails.titleId);
+      return imdbScraper.getMovieDetailsWithId(ImdbMovieDetails.url).then(ImdbRating => {
+        return response.json({
+          "imdb":ImdbRating,
+          "rottenTomatoes":rottenMovieDetails
+        }).end();
+
+      });
+    });
+  });
+});
+
 const server = app.listen(serverConfig.port, (err) => {
   if (err) {
     throw err;
