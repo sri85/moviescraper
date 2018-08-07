@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
     const log = logger.loggerInstance.child({
       id: req.id
     }, true);
-    log.info({res: res}, 'response')
+    log.info({res:res}, 'response')
   }
 
   res.on('finish', afterResponse);
@@ -41,9 +41,7 @@ app.get('/api/imdb/getMovieDetails/id/:titleId', (req, response) => {
 
   return imdbScraper.getMovieDetailsWithId(imdbUrl).then((jsonResponse) => {
     return response.json(jsonResponse).end();
-  }).catch(() => {
-    return response.status(404).json('{"message":"requested movie not found"}').end();
-  });
+  })
 });
 
 app.get('/api/imdb/getId/name/:title', (req, response) => {
@@ -53,8 +51,6 @@ app.get('/api/imdb/getId/name/:title', (req, response) => {
 
   return imdbScraper.getMovieDetailsWithName(imdbUrl, movieTitle).then(movieDetails => {
     return response.json(movieDetails).end();
-  }).catch(() => {
-    return response.status(404).json('{"message":"requested movie not found"}').end();
   });
 });
 
@@ -63,29 +59,27 @@ app.get('/api/rottentomatoes/name/:title', (req, response) => {
   const movieTitle = urlFormatter.sanitizeUrl('rottentomatoes', req.params.title);
   const rottenTomatoesUrl = `https://www.rottentomatoes.com/m/${movieTitle}`;
 
-  return rottenTomatoesScraper.getMovieDetailsWithName(rottenTomatoesUrl, movieTitle).then(movieDetails => {
-    return response.json(movieDetails).end();
-  }).catch(() => {
-    return response.status(404).json('{"message":"requested movie not found"}').end();
-
+  return rottenTomatoesScraper.getMovieDetailsWithName(rottenTomatoesUrl,movieTitle).then(movieDetails => {
+    return response.json(movieDetails);
   });
 });
 
-app.get('/api/movieDetails/:title', (req, response) => {
+app.get('/api/movieDetails/:title',(req,response) => {
 
   const rottenTomatoesMovieTitle = urlFormatter.sanitizeUrl('rottentomatoes', req.params.title);
   const rottenTomatoesUrl = `https://www.rottentomatoes.com/m/${rottenTomatoesMovieTitle}`;
   const imdbMovieTitle = urlFormatter.sanitizeUrl('imdb', req.params.title);
   const imdbUrl = urlFormatter.searchIMDBWithMovieTitle(imdbMovieTitle);
 
-  return rottenTomatoesScraper.getMovieDetailsWithName(rottenTomatoesUrl, rottenTomatoesMovieTitle).then(rottenMovieDetails => {
+  return rottenTomatoesScraper.getMovieDetailsWithName(rottenTomatoesUrl,rottenTomatoesMovieTitle).then(rottenMovieDetails => {
     return imdbScraper.getMovieDetailsWithName(imdbUrl, imdbMovieTitle).then(ImdbMovieDetails => {
       console.log(ImdbMovieDetails.titleId);
       return imdbScraper.getMovieDetailsWithId(ImdbMovieDetails.url).then(ImdbRating => {
         return response.json({
-          "imdb": ImdbRating,
-          "rottenTomatoes": rottenMovieDetails
+          "imdb":ImdbRating,
+          "rottenTomatoes":rottenMovieDetails
         }).end();
+
       });
     });
   });
