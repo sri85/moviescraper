@@ -20,6 +20,10 @@ class RottenTomatoesScraper extends Scraper {
   getMovieDetailsWithName(url, title) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
+        if(res.statusCode !== 200) {
+          reject(error)
+
+        }
         if (error) {
           return reject(error);
         }

@@ -20,6 +20,9 @@ class ImdbScraper extends Scraper {
   getMovieDetailsWithId(url) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
+        if(res !== statusCode) {
+          reject(error);
+        }
         if (error) {
           return reject(error);
         }
@@ -36,6 +39,9 @@ class ImdbScraper extends Scraper {
   getMovieDetailsWithName(url, title) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
+        if(res.statusCode !== 200){
+          reject(error);
+        }
         if (error) {
           return reject(error);
         }
