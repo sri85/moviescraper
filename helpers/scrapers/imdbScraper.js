@@ -17,18 +17,29 @@ class ImdbScraper extends Scraper {
 
   }
 
+  sanitizeActors(actors) {
+    const actorsArray = (actors.split('\n'));
+    const sanitizedActorArray = [];
+    for (let i = 0; i < actorsArray.length; i++) {
+      sanitizedActorArray.push(actorsArray[i].trim().replace(',', ''));
+    }
+    return sanitizedActorArray.join(",");
+  }
+
   getMovieDetailsWithId(url) {
     return new Promise(((resolve, reject) => {
       request(url, (error, res, html) => {
         if (error) {
           return reject(error);
         }
-        const jsonBody = {title: "", release: "", rating: ""};
+        const movieDetails = {title: "", release: "", rating: "", actors: "", summary: ""};
         const $ = cheerio.load(html);
-        jsonBody.title = ($('h1[itemprop="name"]').text().trim());
-        jsonBody.release = ($('span[id="titleYear"] a')).text();
-        jsonBody.rating = ($('div[class="ratingValue"] span')).text();
-        return resolve(jsonBody);
+        movieDetails.title = ($('h1[itemprop="name"]').text().trim());
+        movieDetails.release = ($('span[id="titleYear"] a')).text();
+        movieDetails.rating = ($('div[class="ratingValue"] span')).text();
+        movieDetails.actors = this.sanitizeActors($('span[itemprop="actors"]').text().trim());
+        movieDetails.summary = $('span[itemprop="description"]').text().trim();
+        return resolve(movieDetails);
       });
     }));
   }
@@ -39,13 +50,13 @@ class ImdbScraper extends Scraper {
         if (error) {
           return reject(error);
         }
-        const jsonBody = {titleId: "", movieTitle: "", url: ""};
+        const movieDetails = {titleId: "", movieTitle: "", url: ""};
         const $ = cheerio.load(html);
         const linkText = this.sanitizeRating($('td[class="result_text"] a').attr('href'));
-        jsonBody.titleId = linkText;
-        jsonBody.movieTitle = title;
-        jsonBody.url = "https://www.imdb.com/title/" + linkText;
-        return resolve(jsonBody);
+        movieDetails.titleId = linkText;
+        movieDetails.movieTitle = title;
+        movieDetails.url = "https://www.imdb.com/title/" + linkText;
+        return resolve(movieDetails);
       });
     }));
   }
